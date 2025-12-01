@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Contact form</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 16px; }
+    label { display: block; margin: 8px 0 4px; }
+    input[type="text"], input[type="number"], input[type="tel"], input[type="email"] { width: 300px; }
+    fieldset { margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <h1>Contact</h1>
+
+  <form id="contactForm" onsubmit="return false;">
+    <label for="firstname">Firstname</label>
+    <input type="text" id="firstname" name="firstname">
+
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name">
+
+    <label for="age">Age</label>
+    <input type="number" id="age" name="age" min="0">
+
+    <label for="phone">Phone</label>
+    <input type="tel" id="phone" name="phone">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email">
+
+    <fieldset>
+      <legend>Student at 42 ?</legend>
+      <label><input type="checkbox" id="student" name="student" value="yes"> Yes</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Gender</legend>
+      <label><input type="radio" id="gender_male" name="gender" value="Male" checked> Male</label>
+      <label><input type="radio" id="gender_female" name="gender" value="Female"> Female</label>
+      <label><input type="radio" id="gender_other" name="gender" value="Other"> Other</label>
+    </fieldset>
+
+    <p>
+      <button type="submit" onclick="displayFormContents();">Send</button>
+    </p>
+  </form>
+
+  <script src="popup.js"></script>
+</body>
+</html>
