@@ -2,25 +2,26 @@
 
 import sys
 
+
 def capital_city():
     states = {
-        "Oregon" : "OR",
-        "Alabama" : "AL",
+        "Oregon": "OR",
+        "Alabama": "AL",
         "New Jersey": "NJ",
-        "Colorado" : "CO"
+        "Colorado": "CO",
     }
     capital_cities = {
         "OR": "Salem",
         "AL": "Montgomery",
         "NJ": "Trenton",
-        "CO": "Denver"
+        "CO": "Denver",
     }
-    
+
     if len(sys.argv) != 2:
         return
-    
+
     state = sys.argv[1]
-    
+
     if state in states:
         state_code = states[state]
         print(capital_cities[state_code])
@@ -28,8 +29,9 @@ def capital_city():
         print("Unknown state")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         capital_city()
     except Exception as e:
-        print(f"Erreur: {e}")
+        print(f"Erreur: {e}", file=sys.stderr)
+        sys.exit(1)

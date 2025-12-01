@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 def my_var():
     var1 = 42
     var2 = "42"
@@ -10,7 +11,7 @@ def my_var():
     var7 = {42: 42}
     var8 = (42,)
     var9 = set()
-    
+
     print(f"{var1} est de type {type(var1)}")
     print(f"{var2} est de type {type(var2)}")
     print(f"{var3} est de type {type(var3)}")
@@ -22,7 +23,7 @@ def my_var():
     print(f"{var9} est de type {type(var9)}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         my_var()
     except Exception as e:

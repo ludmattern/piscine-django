@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 
+
 def read_and_display_numbers():
-    with open('numbers.txt', 'r') as file:
+    with open("numbers.txt", "r") as file:
         content = file.read()
-        numbers = content.strip().split(',')
+        numbers = content.strip().split(",")
         for number in numbers:
             print(number)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     try:
         read_and_display_numbers()
     except Exception as e:
