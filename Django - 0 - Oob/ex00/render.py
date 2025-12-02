@@ -12,9 +12,7 @@ def error_exit(message):
 
 def main():
     if len(sys.argv) != 2:
-        error_exit(
-            "nombre d'arguments incorrect\nUsage: python3 render.py <fichier.template>"
-        )
+        error_exit("Usage: python3 render.py <fichier.template>")
 
     template_file = sys.argv[1]
 
@@ -23,6 +21,8 @@ def main():
 
     if not os.path.exists(template_file):
         error_exit(f"le fichier '{template_file}' n'existe pas")
+
+    settings = None
 
     try:
         import settings
@@ -33,8 +33,11 @@ def main():
         content = f.read()
 
     settings_vars = {
-        key: value for key, value in vars(settings).items() if not key.startswith("__")
+        key: value for key, value in vars(settings).items()
+        if not key.startswith("__")
     }
+
+    result = ""
 
     try:
         result = content.format(**settings_vars)
