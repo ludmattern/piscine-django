@@ -1,5 +1,5 @@
 import sys
-import antigravity
+from antigravity import geohash
 
 
 def print_usage():
@@ -78,7 +78,7 @@ def main():
         sys.exit(1)
 
     try:
-        antigravity.geohash(lat, lon, date_dow)
+        geohash(lat, lon, date_dow)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
