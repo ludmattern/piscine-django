@@ -4,7 +4,6 @@ import os
 
 
 def error_exit(message):
-    """Affiche un message d'erreur et quitte le programme."""
     print(f"Erreur: {message}", file=sys.stderr)
     sys.exit(1)
 
