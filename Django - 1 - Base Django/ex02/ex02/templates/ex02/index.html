@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex02 - Formulaire et Historique</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .form-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-input {
+            padding: 10px;
+            width: 300px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .history-section {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .history-entry {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f8f9fa;
+            border-left: 3px solid #007bff;
+        }
+        .timestamp {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .no-history {
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ex02 - Formulaire et Historique</h1>
+
+    <div class="form-section">
+        <h2>Formulaire</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="history-section">
+        <h2>Historique des entrées</h2>
+        {% if history %}
+            {% for entry in history %}
+                <div class="history-entry">
+                    <span class="timestamp">[{{ entry.timestamp }}]</span> {{ entry.text }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-history">Aucune entrée dans l'historique.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

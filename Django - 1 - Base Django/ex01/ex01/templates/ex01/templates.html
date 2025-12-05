@@ -1,0 +1,73 @@
+{% extends "ex01/base.html" %}
+{% load static %}
+
+{% block title %}Ex01 : Moteur de template.{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'ex01/style2.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Ex01 : Moteur de template.</h1>
+
+<h2>Le moteur de template Django</h2>
+<p>
+    Le moteur de template par défaut de Django (Django Template Language - DTL) permet 
+    de séparer la logique de présentation du code Python. Il utilise une syntaxe simple 
+    avec des balises et des filtres pour générer du HTML dynamique.
+</p>
+
+<h2>Les Blocs</h2>
+<p>
+    Les blocs permettent de définir des zones dans un template de base qui peuvent être 
+    surchargées par les templates enfants. C'est le cœur du système d'héritage de templates.
+</p>
+<pre><code>{% templatetag openblock %} block nom_du_bloc {% templatetag closeblock %}
+    Contenu par défaut
+{% templatetag openblock %} endblock {% templatetag closeblock %}</code></pre>
+<p>
+    Un template enfant peut ensuite remplacer ce contenu en redéfinissant le bloc.
+</p>
+
+<h2>Les boucles for ... in</h2>
+<p>
+    La balise <code>for</code> permet d'itérer sur une séquence (liste, queryset, etc.).
+</p>
+<pre><code>{% templatetag openblock %} for item in liste {% templatetag closeblock %}
+    {{ item }}
+{% templatetag openblock %} endfor {% templatetag closeblock %}</code></pre>
+<p><strong>Exemple avec les données passées :</strong></p>
+<ul>
+    {% for item in exemple_liste %}
+    <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Les structures de contrôle if</h2>
+<p>
+    La balise <code>if</code> permet d'afficher conditionnellement du contenu.
+</p>
+<pre><code>{% templatetag openblock %} if condition {% templatetag closeblock %}
+    Affiché si la condition est vraie
+{% templatetag openblock %} elif autre_condition {% templatetag closeblock %}
+    Affiché si autre_condition est vraie
+{% templatetag openblock %} else {% templatetag closeblock %}
+    Affiché sinon
+{% templatetag openblock %} endif {% templatetag closeblock %}</code></pre>
+<p><strong>Exemple :</strong></p>
+<p>
+    {% if afficher_message %}
+    Le message est affiché car la variable afficher_message est True.
+    {% else %}
+    Ce texte ne s'affichera pas.
+    {% endif %}
+</p>
+
+<h2>L'affichage de variables passées par contexte</h2>
+<p>
+    Les variables sont passées depuis la vue via le contexte et affichées avec la syntaxe 
+    <code>{% templatetag openvariable %} nom_variable {% templatetag closevariable %}</code>.
+</p>
+<pre><code>{{ ma_variable }}</code></pre>
+<p><strong>Exemple :</strong> La variable <code>exemple_variable</code> vaut : <strong>{{ exemple_variable }}</strong></p>
+{% endblock %}

@@ -1,0 +1,6 @@
+django
+psycopg2-binary
+# python3 -m venv ../.venv && source ../.venv/bin/activate && pip install -r requirements.txt
+# python3 -m django startproject PROJECTNAME .
+# python3 manage.py startapp APPNAME
+# python3 manage.py runserver

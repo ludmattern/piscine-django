@@ -1,0 +1,66 @@
+{% extends "ex01/base.html" %}
+{% load static %}
+
+{% block title %}Ex01 : Processus d'affichage d'une page statique.{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'ex01/style1.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Ex01 : Processus d'affichage d'une page statique.</h1>
+
+<h2>Le processus de la requête à la réponse</h2>
+
+<ol>
+    <li>
+        <h3>1. La requête HTTP</h3>
+        <p>
+            L'utilisateur entre une URL dans son navigateur (ex: /ex01/affichage). 
+            Le navigateur envoie une requête HTTP au serveur Django.
+        </p>
+    </li>
+
+    <li>
+        <h3>2. Le routage URL (urls.py)</h3>
+        <p>
+            Django reçoit la requête et consulte le fichier <code>urls.py</code> pour 
+            trouver le pattern d'URL correspondant. Chaque URL est associée à une vue spécifique.
+        </p>
+        <pre><code>path('affichage', views.affichage, name='affichage')</code></pre>
+    </li>
+
+    <li>
+        <h3>3. La vue (views.py)</h3>
+        <p>
+            La vue correspondante est appelée. Elle peut effectuer des traitements 
+            (accès base de données, calculs, etc.) et prépare le contexte à passer au template.
+        </p>
+        <pre><code>def affichage(request):
+    return render(request, 'ex01/affichage.html')</code></pre>
+    </li>
+
+    <li>
+        <h3>4. Le template</h3>
+        <p>
+            Django utilise le moteur de template pour rendre le fichier HTML. 
+            Le template peut contenir des variables, des boucles et des conditions 
+            qui sont interprétées par le moteur.
+        </p>
+    </li>
+
+    <li>
+        <h3>5. La réponse HTTP</h3>
+        <p>
+            Une fois le template rendu en HTML pur, Django renvoie une réponse HTTP 
+            au navigateur avec le contenu HTML généré. Le navigateur affiche alors la page.
+        </p>
+    </li>
+</ol>
+
+<h2>Schéma récapitulatif</h2>
+<p>
+    <strong>Navigateur</strong> → Requête HTTP → <strong>urls.py</strong> → <strong>views.py</strong> 
+    → <strong>template.html</strong> → Réponse HTTP → <strong>Navigateur</strong>
+</p>
+{% endblock %}

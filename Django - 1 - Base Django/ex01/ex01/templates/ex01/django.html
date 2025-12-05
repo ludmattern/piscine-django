@@ -1,0 +1,46 @@
+{% extends "ex01/base.html" %}
+{% load static %}
+
+{% block title %}Ex01 : Django, framework web.{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'ex01/style1.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Ex01 : Django, framework web.</h1>
+
+<h2>Qu'est-ce que Django ?</h2>
+<p>
+    Django est un framework web open source écrit en Python. Il suit le modèle architectural 
+    MTV (Model-Template-View), une variante du modèle MVC (Model-View-Controller). Django est 
+    conçu pour permettre le développement rapide d'applications web sécurisées et maintenables.
+</p>
+
+<h2>Historique</h2>
+<p>
+    Django a été créé à l'automne 2003, lorsque les programmeurs web du journal Lawrence 
+    Journal-World, Adrian Holovaty et Simon Willison, ont commencé à utiliser Python pour 
+    construire des applications web.
+</p>
+<p>
+    Le framework a été nommé d'après le guitariste de jazz Django Reinhardt. La première 
+    version publique (0.91) a été publiée en juillet 2005, et la version 1.0 a été publiée 
+    en septembre 2008.
+</p>
+<p>
+    Depuis, Django a connu de nombreuses versions majeures, ajoutant des fonctionnalités 
+    comme les migrations de base de données, un meilleur support des applications réutilisables, 
+    et des améliorations de performance.
+</p>
+
+<h2>Philosophie</h2>
+<p>
+    Django suit plusieurs principes clés :
+</p>
+<ul>
+    <li><strong>DRY (Don't Repeat Yourself)</strong> : Éviter la duplication de code.</li>
+    <li><strong>Convention over Configuration</strong> : Des valeurs par défaut sensées.</li>
+    <li><strong>Loose Coupling</strong> : Les différentes couches de l'application sont indépendantes.</li>
+</ul>
+{% endblock %}
