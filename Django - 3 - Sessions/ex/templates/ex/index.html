@@ -25,6 +25,26 @@
             <div class="card-body">
                 <p class="card-text">{{ tip.content }}</p>
                 <p class="card-text"><small class="text-muted">By {{ tip.author }} on {{ tip.date }}</small></p>
+                
+                <div class="d-flex align-items-center">
+                    <span class="me-2">Upvotes: {{ tip.upvotes.count }}</span>
+                    <span class="me-3">Downvotes: {{ tip.downvotes.count }}</span>
+
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'vote' tip.id 'up' %}" method="post" class="d-inline me-2">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm {% if user in tip.upvotes.all %}btn-success{% else %}btn-outline-success{% endif %}">Upvote</button>
+                        </form>
+                        <form action="{% url 'vote' tip.id 'down' %}" method="post" class="d-inline me-2">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm {% if user in tip.downvotes.all %}btn-danger{% else %}btn-outline-danger{% endif %}">Downvote</button>
+                        </form>
+                        <form action="{% url 'delete_tip' tip.id %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">Delete</button>
+                        </form>
+                    {% endif %}
+                </div>
             </div>
         </div>
     {% empty %}

@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, get_user_model
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from .forms import TipForm, RegistrationForm, LoginForm
 from .models import Tip
 
@@ -19,6 +21,40 @@ def index(request):
             return redirect("index")
 
     return render(request, "ex/index.html", {"tips": tips, "form": form})
+
+
+@login_required
+@require_POST
+def vote(request, tip_id, vote_type):
+    tip = get_object_or_404(Tip, id=tip_id)
+    user = request.user
+
+    if vote_type == "up":
+        if tip.upvotes.filter(id=user.id).exists():
+            tip.upvotes.remove(user)
+        else:
+            tip.upvotes.add(user)
+            tip.downvotes.remove(user)
+    elif vote_type == "down":
+        if tip.downvotes.filter(id=user.id).exists():
+            tip.downvotes.remove(user)
+        else:
+            tip.downvotes.add(user)
+            tip.upvotes.remove(user)
+
+    return redirect("index")
+
+
+@login_required
+@require_POST
+def delete_tip(request, tip_id):
+    tip = get_object_or_404(Tip, id=tip_id)
+    # Allow deletion if user is author or staff/superuser (optional, but good practice)
+    # The requirement says "connected user", implying any connected user can delete?
+    # "La seule restriction à implémenter sera la nécessité d’être connecté pour effectuer des actions de vote ou de suppression."
+    # So yes, any connected user can delete any tip based on strict reading.
+    tip.delete()
+    return redirect("index")
 
 
 def register(request):
