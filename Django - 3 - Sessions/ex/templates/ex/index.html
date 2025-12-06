@@ -1,0 +1,33 @@
+{% extends 'ex/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block content %}
+    <h1>Welcome to the homepage</h1>
+
+    {% if user.is_authenticated %}
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Share a Tip</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% bootstrap_button button_type="submit" content="Post Tip" %}
+                </form>
+            </div>
+        </div>
+    {% endif %}
+
+    <h2>Tips</h2>
+    {% for tip in tips %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <p class="card-text">{{ tip.content }}</p>
+                <p class="card-text"><small class="text-muted">By {{ tip.author }} on {{ tip.date }}</small></p>
+            </div>
+        </div>
+    {% empty %}
+        <p>No tips yet.</p>
+    {% endfor %}
+{% endblock %}

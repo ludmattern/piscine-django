@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
+from .models import Tip
 
 User = get_user_model()
 
@@ -43,3 +44,14 @@ class LoginForm(forms.Form):
                 raise ValidationError("Invalid username or password.")
             self.user = user
         return cleaned_data
+
+
+class TipForm(forms.ModelForm):
+    class Meta:
+        model = Tip
+        fields = ["content"]
+        widgets = {
+            "content": forms.Textarea(
+                attrs={"rows": 3, "placeholder": "Share your tip..."}
+            ),
+        }
