@@ -35,10 +35,12 @@
                             {% csrf_token %}
                             <button type="submit" class="btn btn-sm {% if user in tip.upvotes.all %}btn-success{% else %}btn-outline-success{% endif %}">Upvote</button>
                         </form>
-                        <form action="{% url 'vote' tip.id 'down' %}" method="post" class="d-inline me-2">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-sm {% if user in tip.downvotes.all %}btn-danger{% else %}btn-outline-danger{% endif %}">Downvote</button>
-                        </form>
+                        {% if user == tip.author or perms.ex.downvote_tip %}
+                            <form action="{% url 'vote' tip.id 'down' %}" method="post" class="d-inline me-2">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm {% if user in tip.downvotes.all %}btn-danger{% else %}btn-outline-danger{% endif %}">Downvote</button>
+                            </form>
+                        {% endif %}
                         {% if user == tip.author or perms.ex.delete_tip %}
                             <form action="{% url 'delete_tip' tip.id %}" method="post" class="d-inline">
                                 {% csrf_token %}

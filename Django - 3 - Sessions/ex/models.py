@@ -13,5 +13,10 @@ class Tip(models.Model):
         settings.AUTH_USER_MODEL, related_name="downvoted_tips", blank=True
     )
 
+    class Meta:
+        permissions = [
+            ("downvote_tip", "Can downvote tip"),
+        ]
+
     def __str__(self):
         return f"Tip by {self.author} on {self.date}"

@@ -36,11 +36,12 @@ def vote(request, tip_id, vote_type):
             tip.upvotes.add(user)
             tip.downvotes.remove(user)
     elif vote_type == "down":
-        if tip.downvotes.filter(id=user.id).exists():
-            tip.downvotes.remove(user)
-        else:
-            tip.downvotes.add(user)
-            tip.upvotes.remove(user)
+        if request.user == tip.author or request.user.has_perm("ex.downvote_tip"):
+            if tip.downvotes.filter(id=user.id).exists():
+                tip.downvotes.remove(user)
+            else:
+                tip.downvotes.add(user)
+                tip.upvotes.remove(user)
 
     return redirect("index")
 
