@@ -7,3 +7,6 @@ django-bootstrap5
 # docker compose up -d
 # python manage.py check
 # python3 manage.py runserver
+
+# python3 manage.py createsuperuser --noinput --username admin --email admin@example.com
+# python3 manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); u = User.objects.get(username='admin'); u.set_password('admin'); u.save()"

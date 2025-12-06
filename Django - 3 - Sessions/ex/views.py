@@ -49,11 +49,8 @@ def vote(request, tip_id, vote_type):
 @require_POST
 def delete_tip(request, tip_id):
     tip = get_object_or_404(Tip, id=tip_id)
-    # Allow deletion if user is author or staff/superuser (optional, but good practice)
-    # The requirement says "connected user", implying any connected user can delete?
-    # "La seule restriction à implémenter sera la nécessité d’être connecté pour effectuer des actions de vote ou de suppression."
-    # So yes, any connected user can delete any tip based on strict reading.
-    tip.delete()
+    if request.user == tip.author or request.user.has_perm("ex.delete_tip"):
+        tip.delete()
     return redirect("index")
 
 
