@@ -15,7 +15,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         {% if user.is_authenticated %}
-                            <span class="nav-link">Hello {{ user.username }}!</span>
+                            <span class="nav-link">Hello {{ user.username }} ({{ user.reputation }})!</span>
                         {% else %}
                             <span class="nav-link">Hello {{ request.session.username }}!</span>
                         {% endif %}
