@@ -2,7 +2,6 @@
 
 echo -e "[0/6] Recréation des containers existants..."
 docker compose down
-docker compose up -d
 
 echo -e "[1/6] Démarrage de PostgreSQL..."
 docker compose up -d
