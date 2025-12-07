@@ -1,16 +1,17 @@
 {% extends "loremipsum/base.html" %}
+{% load i18n %}
 
-{% block title %}My Favourites{% endblock %}
+{% block title %}{% trans "My Favourites" %}{% endblock %}
 
 {% block content %}
-    <h1>My Favourites</h1>
+    <h1>{% trans "My Favourites" %}</h1>
     <ul>
         {% for fav in favourites %}
         <li>
             <a href="{% url 'detail' fav.article.pk %}">{{ fav.article.title }}</a>
         </li>
         {% empty %}
-        <li>No favourites found.</li>
+        <li>{% trans "No favourites found." %}</li>
         {% endfor %}
     </ul>
 {% endblock %}

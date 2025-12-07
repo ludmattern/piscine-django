@@ -1,14 +1,15 @@
 {% extends "loremipsum/base.html" %}
+{% load i18n %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{% trans "Register" %}{% endblock %}
 
 {% block content %}
-    <h1>Register</h1>
+    <h1>{% trans "Register" %}</h1>
     <form method="post">
         {% csrf_token %}
         <table>
             {{ form.as_table }}
         </table>
-        <input type="submit" value="Register">
+        <input type="submit" value="{% trans 'Register' %}">
     </form>
 {% endblock %}
