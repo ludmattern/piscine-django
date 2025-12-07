@@ -44,6 +44,7 @@ class ArticleListView(ListView):
     model = Article
     template_name = "loremipsum/article_list.html"
     context_object_name = "articles"
+    ordering = ["-created"]
 
 
 class HomeView(RedirectView):

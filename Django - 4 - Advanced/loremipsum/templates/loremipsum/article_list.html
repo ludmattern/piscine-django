@@ -1,4 +1,5 @@
 {% extends "loremipsum/base.html" %}
+{% load humanize %}
 
 {% block title %}Articles{% endblock %}
 
@@ -19,8 +20,8 @@
             <tr>
                 <td>{{ article.title }}</td>
                 <td>{{ article.author }}</td>
-                <td>{{ article.created }}</td>
-                <td>{{ article.synopsis }}</td>
+                <td>{{ article.created|naturaltime }}</td>
+                <td>{{ article.synopsis|truncatechars:20 }}</td>
                 <td><a href="{% url 'detail' article.pk %}">View</a></td>
             </tr>
             {% endfor %}
