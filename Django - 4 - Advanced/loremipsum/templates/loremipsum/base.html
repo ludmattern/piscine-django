@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load loremipsum_extras %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,11 +55,11 @@
                     {% get_current_language as LANGUAGE_CODE %}
                     {% if LANGUAGE_CODE == 'en' %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/fr{{ request.get_full_path|slice:'3:' }}">FR</a>
+                            <a class="nav-link" href="{{ request.get_full_path|switch_lang_code:'fr' }}">FR</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/en{{ request.get_full_path|slice:'3:' }}">EN</a>
+                            <a class="nav-link" href="{{ request.get_full_path|switch_lang_code:'en' }}">EN</a>
                         </li>
                     {% endif %}
                 </ul>
