@@ -13,6 +13,11 @@ class RegisterView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy("login")
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect("home")
+        return super().dispatch(request, *args, **kwargs)
+
 
 class PublishArticleView(LoginRequiredMixin, CreateView):
     model = Article
@@ -59,8 +64,6 @@ class CustomLoginView(LoginView):
 class CustomLogoutView(LogoutView):
     http_method_names = ["get", "post", "options"]
 
-    # Allow GET request for logout to satisfy "Link" requirement in exercise context
-    # though not recommended in production for Django 5+
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
 
