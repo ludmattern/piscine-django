@@ -1,0 +1,111 @@
+[
+{
+  "model": "loremipsum.article",
+  "pk": 1,
+  "fields": {
+    "title": "Article 1",
+    "author": 1,
+    "created": "2025-12-07T12:24:50.301Z",
+    "synopsis": "Synopsis 1",
+    "content": "Content 1"
+  }
+},
+{
+  "model": "loremipsum.article",
+  "pk": 2,
+  "fields": {
+    "title": "Article 2",
+    "author": 1,
+    "created": "2025-12-07T12:24:50.305Z",
+    "synopsis": "Synopsis 2",
+    "content": "Content 2"
+  }
+},
+{
+  "model": "loremipsum.article",
+  "pk": 3,
+  "fields": {
+    "title": "Article 3",
+    "author": 2,
+    "created": "2025-12-07T12:24:50.309Z",
+    "synopsis": "Synopsis 3",
+    "content": "Content 3"
+  }
+},
+{
+  "model": "loremipsum.article",
+  "pk": 4,
+  "fields": {
+    "title": "Article 4",
+    "author": 2,
+    "created": "2025-12-07T12:24:50.312Z",
+    "synopsis": "Synopsis 4",
+    "content": "Content 4"
+  }
+},
+{
+  "model": "loremipsum.article",
+  "pk": 5,
+  "fields": {
+    "title": "Article 5",
+    "author": 3,
+    "created": "2025-12-07T12:24:50.316Z",
+    "synopsis": "Synopsis 5",
+    "content": "Content 5"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$jI33MZAEdQy1BsgClhmgeL$H5rKdu+gUvZFkIYK1jOSyB/W06D6gxMZzLjaDG3KRTw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user1",
+    "first_name": "",
+    "last_name": "",
+    "email": "user1@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-12-07T12:24:49.790Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$JVPTy7Locf9w7wAXQcmHk4$6CQma5ELZHsD9JpW/67DzC6REOW7E7k4WDoijluXdus=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user2",
+    "first_name": "",
+    "last_name": "",
+    "email": "user2@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-12-07T12:24:49.961Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$sKiZqrD3sgi4qRWQEpQpOo$Jkr2H0QVP00qwFp5U5/pSHmXBZ+YZ3goOop5fd+6/hw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "user3",
+    "first_name": "",
+    "last_name": "",
+    "email": "user3@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-12-07T12:24:50.130Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
