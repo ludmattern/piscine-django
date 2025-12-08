@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <div id="login-section" {% if user.is_authenticated %}style="display:none;"{% endif %}>
+        <h2>Login</h2>
+        <form id="login-form" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div id="login-errors" class="error"></div>
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div id="logged-in-section" {% if not user.is_authenticated %}style="display:none;"{% endif %}>
+        <h2>Logged as <span id="username">{{ user.username }}</span></h2>
+        <button id="logout-btn">Logout</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!/^(GET|HEAD|OPTIONS|TRACE)$/.test(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                    }
+                }
+            });
+
+            $('#login-form').on('submit', function(e) {
+                e.preventDefault();
+                $('#login-errors').empty();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if (response.success) {
+                            const urlParams = new URLSearchParams(window.location.search);
+                            const nextUrl = urlParams.get('next');
+                            if (nextUrl) {
+                                window.location.href = nextUrl;
+                            } else {
+                                $('#username').text(response.username);
+                                $('#login-section').hide();
+                                $('#logged-in-section').show();
+                                $('#login-form')[0].reset();
+                            }
+                        } else {
+                            if (response.errors) {
+                                $.each(response.errors, function(key, value) {
+                                    $('#login-errors').append('<p>' + value + '</p>');
+                                });
+                            }
+                        }
+                    },
+                    error: function() {
+                        console.log('Error');
+                    }
+                });
+            });
+
+            $('#logout-btn').on('click', function() {
+                $.ajax({
+                    url: "{% url 'logout' %}",
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.success) {
+                            $('#logged-in-section').hide();
+                            $('#login-section').show();
+                        }
+                    },
+                    error: function() {
+                        console.log('Error');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
