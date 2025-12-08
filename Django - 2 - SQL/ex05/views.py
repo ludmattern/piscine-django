@@ -36,18 +36,16 @@ def populate(request):
 
     for episode_nb, title, director, producer, release_date in movies_data:
         try:
-            Movies.objects.update_or_create(
+            Movies.objects.create(
                 episode_nb=episode_nb,
-                defaults={
-                    "title": title,
-                    "director": director,
-                    "producer": producer,
-                    "release_date": release_date,
-                },
+                title=title,
+                director=director,
+                producer=producer,
+                release_date=release_date,
             )
             response_text += "OK<br>"
         except Exception as e:
-            response_text += f"{title}: {e}<br>"
+            response_text += f"{e}<br>"
 
     return HttpResponse(response_text)
 
