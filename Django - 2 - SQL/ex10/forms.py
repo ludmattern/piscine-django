@@ -4,13 +4,19 @@ from .models import People
 
 class SearchForm(forms.Form):
     min_release_date = forms.DateField(
-        widget=forms.DateInput(attrs={"type": "date"}), required=True
+        label="Movies minimum release date",
+        widget=forms.DateInput(attrs={"type": "date"}),
+        required=True,
     )
     max_release_date = forms.DateField(
-        widget=forms.DateInput(attrs={"type": "date"}), required=True
+        label="Movies maximum release date",
+        widget=forms.DateInput(attrs={"type": "date"}),
+        required=True,
     )
-    planet_diameter = forms.IntegerField(required=True)
-    gender = forms.ChoiceField(choices=[], required=True)
+    planet_diameter = forms.IntegerField(
+        label="Planet diameter greater than", required=True
+    )
+    gender = forms.ChoiceField(label="Character gender", choices=[], required=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
