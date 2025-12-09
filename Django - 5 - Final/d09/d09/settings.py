@@ -25,20 +25,23 @@ SECRET_KEY = "django-insecure-l=m533wfc_w-a8vfdimd8h@^w^r=cf(rbwk(2!q()!3$4ia89j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "channels",
     "django_bootstrap5",
-    "account",
+    "d09.account",
+    "d09.chat",
 ]
 
 MIDDLEWARE = [
@@ -69,6 +72,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "d09.wsgi.application"
+ASGI_APPLICATION = "d09.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
+
 
 
 # Database

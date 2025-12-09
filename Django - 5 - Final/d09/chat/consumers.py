@@ -1,4 +1,5 @@
 import json
+import hashlib
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from .models import Room, Message, ConnectedUser
@@ -7,7 +8,9 @@ from django.contrib.auth.models import User
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
-        self.room_group_name = 'chat_%s' % self.room_name
+        # Group names must be valid unicode strings containing only ASCII alphanumerics, hyphens, underscores, or periods.
+        # We use a hash of the room name to ensure it meets these requirements.
+        self.room_group_name = 'chat_%s' % hashlib.md5(self.room_name.encode('utf-8')).hexdigest()
 
         # Join room group
         await self.channel_layer.group_add(
